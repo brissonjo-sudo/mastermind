@@ -1,0 +1,6 @@
+.env
+.env.*
+logs/*.md
+!logs/.gitkeep
+.DS_Store
+node_modules/
