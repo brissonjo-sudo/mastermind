@@ -1,5 +1,6 @@
 {
   "name": "conseil-ia",
+  "description": "Marketplace du plugin Conseil-IA — conseil d'auto-critique structurée multi-agents.",
   "owner": {
     "name": "brissonjo",
     "email": "brisson.jo@gmail.com"
