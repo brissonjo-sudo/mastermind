@@ -65,6 +65,23 @@ Réponse finale  +  journal (logs/)
 
 ---
 
+## Installation (plugin Claude Code)
+
+Conseil-IA se distribue comme **plugin installable** (un seul artefact). Le manifeste vit
+dans `.claude-plugin/`, les composants à la racine (`skills/`, `agents/`).
+
+```sh
+claude plugin validate ./mastermind --strict   # lint manifeste + frontmatters
+/plugin marketplace add ./mastermind            # enregistre la marketplace locale
+/plugin install conseil-ia@conseil-ia           # installe le plugin
+```
+
+Une fois installé : les 9 sous-agents apparaissent en `conseil-ia:<agent>` (avec leur modèle
+dédié) et le skill s'active sur « réunis le conseil ». Voir `CHANGELOG.md` et
+`obsidian/decisions.md` (ADR D10).
+
+---
+
 ## Décisions clés (issues de la revue)
 
 - **P0 — Grounding outillé** sur l'Empiriste *avant* délibération.

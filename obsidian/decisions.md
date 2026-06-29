@@ -34,5 +34,13 @@ Adversaire + Chairman uniquement (5/7 des IA). Orchestrateur Sonnet (argument pa
 Chaque agent porte son `model:` en frontmatter (doc Claude Code). Orchestrateur Sonnet
 n'oblige pas les sous-agents à Sonnet. Seul `model` vide = `inherit`. Toujours expliciter Opus.
 
+## D10 — Packaging plugin *(distribution)*
+Conseil-IA devient un **plugin Claude Code installable** (un seul artefact). Layout racine
+conventionnel : `skills/` + `agents/` à la racine, manifeste `.claude-plugin/plugin.json`,
+catalogue `.claude-plugin/marketplace.json` (marketplace locale, `source: "./"`).
+Le frontmatter des agents est **inchangé** → les `model:` dédiés sont préservés (zéro régression
+sur l'archi multi-modèles, cf. [[roles]], [[architecture]]). Install : `/plugin marketplace add` +
+`/plugin install conseil-ia@conseil-ia`. Versionné `2.0.0` (lignée V2). #plugin
+
 ## Ouvert — V3
 Brancher de vrais modèles externes (multi-fournisseurs) pour décorréler le **savoir**, pas seulement le raisonnement.

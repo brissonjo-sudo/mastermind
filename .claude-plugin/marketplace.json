@@ -1,0 +1,15 @@
+{
+  "name": "conseil-ia",
+  "description": "Marketplace du plugin Conseil-IA — conseil d'auto-critique structurée multi-agents.",
+  "owner": {
+    "name": "brissonjo",
+    "email": "brisson.jo@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "conseil-ia",
+      "source": "./",
+      "description": "Conseil d'auto-critique structurée multi-agents : grounding factuel, débat multi-postures anonymisé, synthèse exposant la dissidence."
+    }
+  ]
+}

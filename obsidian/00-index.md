@@ -7,8 +7,11 @@ Vault de documentation. Notes courtes, liées, optimisées pour recherche sobre.
 - [[roles]] — fiche de chaque agent
 - [[decisions]] — journal des choix (ADR)
 
+## Distribution
+Plugin installable (`.claude-plugin/`). Voir [[decisions]] (D10) et `../CHANGELOG.md`.
+
 ## Tags
-#conseil #architecture #decision #agent #securite
+#conseil #architecture #decision #agent #securite #plugin
 
 ## Convention
 Une note = un concept. Lien `[[...]]` plutôt que duplication. Titres explicites

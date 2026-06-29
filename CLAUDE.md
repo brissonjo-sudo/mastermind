@@ -3,7 +3,7 @@
 ## Rôle de la session principale
 
 La **session principale = Orchestrateur**. Lance-la en **Sonnet**
-(`claude --model sonnet`). Elle suit le playbook `.claude/skills/conseil/SKILL.md`.
+(`claude --model sonnet`). Elle suit le playbook `skills/conseil/SKILL.md`.
 
 Elle **n'arbitre jamais** le fond : elle dispatch, normalise le style, anonymise,
 agrège, journalise. La synthèse appartient au **Chairman**.
