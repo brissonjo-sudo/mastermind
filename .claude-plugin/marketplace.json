@@ -1,0 +1,14 @@
+{
+  "name": "conseil-ia",
+  "owner": {
+    "name": "brissonjo",
+    "email": "brisson.jo@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "conseil-ia",
+      "source": "./",
+      "description": "Conseil d'auto-critique structurée multi-agents : grounding factuel, débat multi-postures anonymisé, synthèse exposant la dissidence."
+    }
+  ]
+}
