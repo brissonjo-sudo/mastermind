@@ -8,9 +8,13 @@ Voir [[00-index]], [[roles]], [[decisions]].
 → Stage 2 revue sur cartes → débat focalisé (complexe) → Chairman dissident → Garde-fou`
 
 ## Niveaux de routage
-- **TRIVIALE** → 1 réponse directe, pas de conseil.
-- **STANDARD** → 3 personas (Adversaire, Empiriste, Pragmatique).
-- **COMPLEXE** → 5 personas + débat focalisé.
+Le Routeur émet aussi `grounding_requis` (oui/non) qui pilote l'appel à l'Empiriste.
+- **TRIVIALE** → réponse directe (+ mini-grounding si `grounding_requis: oui`, sinon drapeau « non sourcé »).
+- **STANDARD** → 2 personas de débat (Adversaire, Pragmatique) + Empiriste en grounding.
+- **COMPLEXE** → 4 personas de débat (Adversaire, Pragmatique, Divergent, Hypersystématique)
+  + Empiriste en grounding + débat focalisé.
+
+L'Empiriste n'est **pas** un persona de débat (il produit le dossier de faits, pas une carte).
 
 ## Modèles
 2 Opus (Adversaire, Chairman) · Sonnet (orchestrateur + personas) · Haiku (routeur, revue, garde-fou).

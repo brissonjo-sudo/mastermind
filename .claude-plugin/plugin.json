@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "conseil-ia",
   "displayName": "Conseil-IA",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Conseil d'auto-critique structurée multi-agents : grounding factuel, débat multi-postures anonymisé, synthèse exposant la dissidence.",
   "author": {
     "name": "brissonjo",

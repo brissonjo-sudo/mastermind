@@ -42,5 +42,15 @@ Le frontmatter des agents est **inchangé** → les `model:` dédiés sont prés
 sur l'archi multi-modèles, cf. [[roles]], [[architecture]]). Install : `/plugin marketplace add` +
 `/plugin install conseil-ia@conseil-ia`. Versionné `2.0.0` (lignée V2). #plugin
 
+## D11 — Alignement spec/réalité + anti-hallucination triviale *(audit skill)*
+Audit du skill `conseil`. Défauts corrigés (le SKILL divergeait du comportement réel prouvé
+par `logs/2026-06-15-2310.md`) :
+- **`grounding_requis` câblé** ; TRIVIALE factuelle → mini-grounding ou drapeau « non sourcé ».
+- **Personas énumérés** par niveau ; correction **« 5 → 4 » personas de débat** ; Empiriste ≠ persona.
+- **`revue-croisee` émet `divergences`** (paires opposées) → pilote l'Étape 5 (métrique auparavant absente).
+- **Débat spécifié** : ré-invocation des personas source via table interne, 400 tok/camp.
+- **Anonymisation style-only** : interdiction de toucher thèse/preuves/confiance/drapeaux (intégrité épistémique).
+Zéro régression, versionné `2.1.0`. Voir [[architecture]], [[roles]]. #skill #decision
+
 ## Ouvert — V3
 Brancher de vrais modèles externes (multi-fournisseurs) pour décorréler le **savoir**, pas seulement le raisonnement.

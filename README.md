@@ -39,8 +39,8 @@
 Question
   │
 [ROUTEUR · Haiku] ── TRIVIALE ──→ 1 réponse Sonnet ──→ Garde-fou ──→ fin
-  │                  STANDARD  ──→ conseil léger (3 personas)
-  └──────────────────COMPLEXE ──→ conseil complet (5 personas)
+  │  (+ grounding_requis)  STANDARD  ──→ conseil léger (2 personas de débat)
+  └──────────────────────  COMPLEXE ──→ conseil complet (4 personas de débat)
   │
 [EMPIRISTE] grounding : sources réelles → DOSSIER DE FAITS vérifiés
   │
@@ -49,11 +49,11 @@ STAGE 1 — Opinions (personas en parallèle, sur le dossier de faits)
   │
 [ORCHESTRATEUR · Sonnet] normalise le style + anonymise (A,B,C…)
   │
-STAGE 2 — Revue croisée SUR CARTES (classement) · Haiku
+STAGE 2 — Revue croisée SUR CARTES (classement + paires divergentes) · Haiku
   │
-[ORCHESTRATEUR] agrège + isole les 2-3 cartes les plus divergentes
+[ORCHESTRATEUR] agrège + prend les paires `divergences` remontées
   │
-[DÉBAT FOCALISÉ] (complexe seulement) divergents s'affrontent · 400 tokens max
+[DÉBAT FOCALISÉ] (complexe) ré-invoque les personas source · 400 tokens max/camp
   │
 [CHAIRMAN · Opus] thèse majoritaire + objection minoritaire la + forte
                   + ce qui ferait basculer + niveau de confiance
