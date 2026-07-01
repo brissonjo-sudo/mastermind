@@ -3,6 +3,23 @@
 Toutes les évolutions notables de Conseil-IA. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/), versionnage [SemVer](https://semver.org/).
 
+## [2.2.0] — 2026-07-01
+
+### Changed — audit du skill `conseil`, correctifs qualité/token (DRY + progressive disclosure)
+- **Schéma de CARTE : source unique.** L'Étape 2 du SKILL ne redéfinit plus le schéma
+  (auparavant dupliqué avec `CLAUDE.md`) ; elle référence désormais `CLAUDE.md` §
+  *Schéma de CARTE*, seule source canonique. Les agents personas gardent leurs propres
+  exemples de CARTE adaptés à leur rôle (contenu différent, pas une duplication à fusionner).
+- **Format de log en progressive disclosure.** Le gabarit détaillé du journal est déplacé
+  dans `skills/conseil/references/log-format.md` (chargé seulement à l'Étape 8), au lieu
+  d'être décrit inline dans le playbook — allège le coût toujours-actif du skill.
+- Parallélisme des invocations personas (Étape 2) déjà explicité en 2.1.0, confirmé sans
+  changement supplémentaire.
+
+### Notes
+- Correspond à l'ADR **D12** (`obsidian/decisions.md`). Complète l'audit du skill (D11) :
+  aucun changement de comportement, uniquement structure/coût de la documentation.
+
 ## [2.1.0] — 2026-07-01
 
 ### Changed — audit du skill `conseil` (alignement spec/réalité + intégrité épistémique)

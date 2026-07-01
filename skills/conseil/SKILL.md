@@ -45,14 +45,8 @@ sur une question factuelle.
 
 Invoque les personas retenus **en parallèle** (toutes les invocations dans un seul message),
 chacun recevant : la question + le dossier de faits.
-Chaque persona rend une **CARTE** stricte (schéma unique défini dans `CLAUDE.md`) :
-
-```
-these: <1 phrase>
-preuves: [<fait + source>, ...]
-confiance: élevée | moyenne | faible
-drapeaux: [<hypothèse / point à vérifier>, ...]
-```
+Chaque persona rend une **CARTE** — schéma canonique unique : `CLAUDE.md` § *Schéma de CARTE*.
+Ne redéfinis pas le schéma ici ; si tu dois le modifier, modifie-le seulement à cet endroit.
 
 ## Étape 3 — Normalisation + anonymisation
 
@@ -96,8 +90,8 @@ gras sur mots-clés, une action unique en fin). Ne touche pas au fond.
 
 ## Étape 8 — Journal
 
-Écris `logs/AAAA-MM-JJ-HHMM.md` : niveau de routage, dossier de faits, cartes,
-classements, divergences, synthèse, confiance.
+Écris `logs/AAAA-MM-JJ-HHMM.md`. Gabarit détaillé : `references/log-format.md`
+(à lire seulement à cette étape).
 
 ## Garde-fous
 
