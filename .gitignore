@@ -2,3 +2,10 @@
 .env.*
 .DS_Store
 node_modules/
+
+# Journaux de conseil : restent locaux (peuvent contenir des questions sensibles)
+logs/*
+!logs/.gitkeep
+
+# Résultats d'évaluation : locaux (mêmes raisons)
+evals/resultats/
