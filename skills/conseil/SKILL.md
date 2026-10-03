@@ -5,7 +5,18 @@ description: Réunit un conseil d'auto-critique structurée pour répondre à un
 
 # Playbook — Orchestration du Conseil
 
-Tu es l'**Orchestrateur**. Tu pilotes le flux ci-dessous. Tu n'arbitres pas le fond.
+## Mode d'exécution
+
+- **Tu es la session principale** (pas l'agent `orchestrateur`) → **délègue**. Invoque le
+  sous-agent `orchestrateur` **en avant-plan** avec la question **telle quelle** + le contexte
+  utile de la conversation (pièces, contraintes, profil de sortie). Affiche ensuite sa sortie
+  **sans la modifier**. STOP. Raison : l'orchestrateur tourne en Sonnet quel que soit le modèle
+  de ta session, et son contexte isolé n'encombre pas le tien.
+- **Repli** : si `orchestrateur` est indisponible ou ne peut pas lancer de sous-agents
+  (Claude Code ancien, imbrication désactivée), exécute toi-même les étapes 0 à 8.
+- **Tu es l'agent `orchestrateur`** → exécute les étapes 0 à 8 ci-dessous.
+
+Dans les étapes, **tu** = l'Orchestrateur. Tu pilotes le flux. Tu n'arbitres pas le fond.
 
 ## Étape 0 — Routage
 
