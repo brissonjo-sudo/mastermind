@@ -59,5 +59,29 @@ journal (Étape 8) déplacé vers `skills/conseil/references/log-format.md`, cha
 au moment d'écrire le log — réduit le coût toujours-actif du skill sans perdre d'info.
 Aucun changement de comportement. Voir [[architecture]]. #skill #decision
 
+## D13 — Mise à niveau Claude Code 2.1.288 *(audit 2026-10-03)*
+Audit de pertinence face aux capacités actuelles. Supersède partiellement D9, D12 et le
+commit `f3a6302` (journaux versionnés).
+- **Orchestrateur = agent** `orchestrateur` (Sonnet) : la session principale délègue, quel
+  que soit son modèle. Logique toujours dans le SKILL (chargé via l'outil Skill). Repli :
+  exécution directe si imbrication indisponible. Outil `Agent` sans allowlist : syntaxe
+  `Agent(type)` non documentée pour les agents namespacés d'un plugin. *(supersède D9 sur
+  « orchestrateur = session lancée en Sonnet »)*
+- **`omitClaudeMd: true`** sur tous les agents : la doc confirme qu'un sous-agent charge
+  par défaut toute la hiérarchie `CLAUDE.md`, dont les consignes de format du profil global.
+- **`effort` explicite** (xhigh Opus, high Empiriste, medium Sonnet ; non fixé sur Haiku,
+  niveaux supportés non vérifiés) + **`maxTurns`** sur chaque agent.
+- **Revue croisée Haiku → Sonnet**, classement **indicatif** ; suppression de
+  « l'agrégation » (moyenne sur un seul relecteur = défaut de spec).
+- **Anonymisation mécanique** : plus de réécriture de style (risque d'altérer le fond ;
+  les cartes sont déjà structurées). *(supersède D11 sur la normalisation de style)*
+- **Chairman écrit la sortie scannable** (+ 5e bloc « prochaine action ») ; **Garde-fou
+  vérifie sans réécrire**, 1 reprise max.
+- **Schéma de CARTE → `skills/conseil/references/carte.md`** : le `CLAUDE.md` du dépôt ne
+  voyage pas avec le plugin. *(supersède D12 sur l'emplacement du schéma)*
+- **Journaux locaux** : `logs/*` ignoré (dépôt public). Historique distant non réécrit.
+- **Banc d'essai** `evals/` : la valeur ajoutée vs Opus seul + web reste à prouver.
+Versionné `2.3.0`. Voir [[architecture]], [[roles]]. #decision #plugin #skill
+
 ## Ouvert — V3
 Brancher de vrais modèles externes (multi-fournisseurs) pour décorréler le **savoir**, pas seulement le raisonnement.

@@ -3,6 +3,39 @@
 Toutes les évolutions notables de Conseil-IA. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/), versionnage [SemVer](https://semver.org/).
 
+## [2.3.0] — 2026-10-03
+
+### Added
+- **Agent `orchestrateur`** (Sonnet) : la session principale lui délègue le conseil, quel
+  que soit son modèle. Repli : exécution directe si l'imbrication est indisponible.
+- **Banc d'essai `evals/`** : protocole A/B à l'aveugle conseil vs Opus seul + web.
+- `skills/conseil/references/carte.md` : schéma de CARTE canonique, embarqué dans le plugin.
+
+### Changed
+- Frontmatter : `omitClaudeMd: true` sur tous les agents, `effort` explicite, `maxTurns`.
+- **Revue croisée** : Haiku → Sonnet, reçoit le dossier de faits, classement indicatif ;
+  plus d'« agrégation » des classements (un seul relecteur).
+- **Anonymisation mécanique** (cartes mot pour mot, ordre mélangé) au lieu d'une
+  réécriture de style.
+- **Chairman** : écrit directement la sortie scannable + bloc « prochaine action ».
+- **Garde-fou** : vérifie sans réécrire (verdict + défauts) ; 1 reprise Chairman max.
+- `logs/*` ignoré par git ; le journal existant est retiré de l'index (conservé en local).
+- Journaux nommés `logs/AAAA-MM-JJ-<sujet>.md` : l'heure n'est pas accessible aux agents.
+
+### Fixed (trouvé au test de fumée)
+- L'orchestrateur lançait ses sous-agents en arrière-plan (défaut) et rendait la main
+  avant leur retour → sortie vide. Toute invocation est désormais en avant-plan.
+
+### Vérifié
+- Test de fumée headless (`claude -p --plugin-dir`, CLI 2.1.288, dossier neutre) :
+  skill → `orchestrateur` → `routeur` → `garde-fou` → journal. Branche TRIVIALE seulement ;
+  les branches STANDARD/COMPLEXE (Opus) n'ont pas été exécutées.
+
+### Notes
+- **Prérequis : Claude Code ≥ 2.1.271.** ADR **D13** (`obsidian/decisions.md`).
+- Changement de comportement : la sortie finale est celle du Chairman, non plus une
+  reformulation du Garde-fou.
+
 ## [2.2.0] — 2026-07-01
 
 ### Changed — audit du skill `conseil`, correctifs qualité/token (DRY + progressive disclosure)

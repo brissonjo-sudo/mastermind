@@ -13,32 +13,35 @@
 
 ➡️ **Conséquence non négociable :** le **grounding** (sources réelles avant délibération) n'est pas une option. Sans lui, le conseil fabrique du **faux consensus**. La vraie diversité de modèles = **V3 multi-fournisseurs** (hors périmètre ici).
 
+➡️ **Valeur ajoutée à prouver :** tant que le banc d'essai (`evals/`) n'a pas tourné, l'avantage du conseil sur un appel Opus unique avec recherche web reste une **hypothèse**.
+
 ---
 
-## Les 8 agents
+## Les 10 agents
 
-| # | Agent | Modèle | Rôle |
+| # | Agent | Modèle · effort | Rôle |
 |---|---|---|---|
-| 1 | **Routeur** | Haiku | Classe la question : triviale / standard / complexe |
-| 2 | **Orchestrateur** | Sonnet | Dispatch, **normalise le style**, anonymise, agrège *(= session principale)* |
-| 3 | **Empiriste** | Sonnet + outils | **Grounding** : interroge sources réelles (web + Légifrance) |
-| 4 | **Adversaire** | Opus | Doute + attaque la conclusion *(fusion Sceptique + Red-team)* |
-| 5 | **Pragmatique** | Sonnet | Opérationnalité / faisabilité terrain |
-| 6 | **Divergent** | Sonnet | Liens latéraux, angles créatifs |
-| 7 | **Hypersystématique** | Sonnet | Traque l'incohérence interne |
-| 8 | **Chairman** | Opus | Synthèse : majorité **+ dissidence + bascule** |
-| — | **Garde-fou** | Haiku | Passe de sortie : format accessible / TDA |
+| 1 | **Orchestrateur** | Sonnet · medium | Dispatch, anonymise (mécanique), journalise. Reçoit le conseil de la session principale |
+| 2 | **Routeur** | Haiku | Classe la question : triviale / standard / complexe + `grounding_requis` |
+| 3 | **Empiriste** | Sonnet · high + web | **Grounding** : interroge sources réelles (web + Légifrance) |
+| 4 | **Adversaire** | Opus · xhigh | Doute + attaque la conclusion *(fusion Sceptique + Red-team)* |
+| 5 | **Pragmatique** | Sonnet · medium | Opérationnalité / faisabilité terrain |
+| 6 | **Divergent** | Sonnet · medium | Liens latéraux, angles créatifs |
+| 7 | **Hypersystématique** | Sonnet · medium | Traque l'incohérence interne |
+| 8 | **Revue croisée** | Sonnet · medium | Évalue les cartes anonymisées + repère les paires divergentes |
+| 9 | **Chairman** | Opus · xhigh | Synthèse scannable : majorité **+ dissidence + bascule + action** |
+| 10 | **Garde-fou** | Haiku | **Vérifie** complétude et format accessible / TDA, sans réécrire |
 
-**2 Opus** (Adversaire + Chairman). Tout le reste en Sonnet/Haiku. Orchestrateur en **Sonnet** car l'anonymisation = normalisation de style (hors de portée de Haiku).
+**2 Opus** (Adversaire + Chairman). Tous les agents portent `omitClaudeMd: true` : leur contexte vient du prompt de délégation, pas des `CLAUDE.md` de l'utilisateur.
 
 ---
 
 ## Flux
 
 ```
-Question
+Question → session principale ──délègue──→ [ORCHESTRATEUR · Sonnet]
   │
-[ROUTEUR · Haiku] ── TRIVIALE ──→ 1 réponse Sonnet ──→ Garde-fou ──→ fin
+[ROUTEUR · Haiku] ── TRIVIALE ──→ réponse directe ──→ Garde-fou ──→ fin
   │  (+ grounding_requis)  STANDARD  ──→ conseil léger (2 personas de débat)
   └──────────────────────  COMPLEXE ──→ conseil complet (4 personas de débat)
   │
@@ -47,28 +50,27 @@ Question
 STAGE 1 — Opinions (personas en parallèle, sur le dossier de faits)
   chaque persona rend une CARTE { thèse · preuves · confiance · drapeaux }
   │
-[ORCHESTRATEUR · Sonnet] normalise le style + anonymise (A,B,C…)
+[ORCHESTRATEUR] anonymise mécaniquement (mot pour mot, ordre mélangé, A,B,C…)
   │
-STAGE 2 — Revue croisée SUR CARTES (classement + paires divergentes) · Haiku
-  │
-[ORCHESTRATEUR] agrège + prend les paires `divergences` remontées
+STAGE 2 — Revue croisée SUR CARTES (évaluation indicative + paires divergentes) · Sonnet
   │
 [DÉBAT FOCALISÉ] (complexe) ré-invoque les personas source · 400 tokens max/camp
   │
-[CHAIRMAN · Opus] thèse majoritaire + objection minoritaire la + forte
-                  + ce qui ferait basculer + niveau de confiance
+[CHAIRMAN · Opus] synthèse scannable : majorité + dissidence + bascule
+                  + confiance + une action
   │
-[GARDE-FOU · Haiku] scan accessibilité → format scannable
+[GARDE-FOU · Haiku] vérifie (conforme / non conforme → 1 reprise Chairman)
   │
-Réponse finale  +  journal (logs/)
+Réponse finale  +  journal local (logs/)
 ```
 
 ---
 
 ## Installation (plugin Claude Code)
 
-Conseil-IA se distribue comme **plugin installable** (un seul artefact). Le manifeste vit
-dans `.claude-plugin/`, les composants à la racine (`skills/`, `agents/`).
+Prérequis : **Claude Code ≥ 2.1.271** (`omitClaudeMd`, sous-agents imbriqués).
+Vérifier avec `claude --version`. Sous Windows, une ancienne installation npm
+(`%APPDATA%\npm\claude`) peut masquer l'installation native à jour dans le PATH.
 
 ```sh
 claude plugin validate ./mastermind --strict   # lint manifeste + frontmatters
@@ -76,32 +78,33 @@ claude plugin validate ./mastermind --strict   # lint manifeste + frontmatters
 /plugin install conseil-ia@conseil-ia           # installe le plugin
 ```
 
-Une fois installé : les 9 sous-agents apparaissent en `conseil-ia:<agent>` (avec leur modèle
-dédié) et le skill s'active sur « réunis le conseil ». Voir `CHANGELOG.md` et
-`obsidian/decisions.md` (ADR D10).
+Une fois installé : les 10 sous-agents apparaissent en `conseil-ia:<agent>` (avec leur modèle
+dédié) et le skill s'active sur « réunis le conseil ». La session principale peut tourner
+sur n'importe quel modèle : elle délègue à l'Orchestrateur (Sonnet). Voir `CHANGELOG.md` et
+`obsidian/decisions.md` (ADR D10, D13).
 
 ---
 
-## Décisions clés (issues de la revue)
+## Décisions clés
 
 - **P0 — Grounding outillé** sur l'Empiriste *avant* délibération.
 - **P0 — Routeur** : pas 14 appels pour une question triviale.
 - **P0 — Stage 2 sur cartes** (pas la prose) : casse le coût O(n²).
 - **P1 — Adversaire** : Sceptique + Red-team fusionnés (6→5 personas).
 - **P1 — Chairman dissident** : expose la minorité au lieu de la moyenner.
-- **P1 — Garde-fou = gabarit léger**, pas un 9ᵉ agent lourd.
-- **P2 — Normalisation stylistique** avant Stage 2 (anti-réidentification).
+- **D13 — Orchestrateur délégué**, anonymisation mécanique, Chairman scannable +
+  Garde-fou vérificateur, revue croisée en Sonnet, `effort` explicite, journaux locaux.
 
 ---
 
 ## Sécurité
 
-- **Moindre privilège** : chaque sous-agent est **read-only** (`Read, Grep, Glob`) ; seul l'Empiriste a `WebSearch, WebFetch`.
+- **Moindre privilège** : sous-agents **read-only** (`Read, Grep, Glob`) ; seul l'Empiriste a `WebSearch, WebFetch` ; l'Orchestrateur a `Agent, Skill, Write` (écriture limitée au journal).
 - **Secrets** : jamais dans le repo. `.env` ignoré (voir `.gitignore`). Aucune clé en clair dans les agents.
-- **Données sensibles** (dossiers juridiques) : restent locales, pas de sortie vers un tiers non sollicité.
+- **Données sensibles** (dossiers juridiques) : restent locales. `logs/` et `evals/resultats/` sont **ignorés par git** (dépôt public).
 
 ---
 
 ## Documentation
 
-Vault Obsidian dans `obsidian/` — notes courtes, liées, taguées, optimisées pour une recherche sobre en tokens. Journal des décisions dans `obsidian/decisions.md`.
+Vault Obsidian dans `obsidian/` — notes courtes, liées, taguées, optimisées pour une recherche sobre en tokens. Journal des décisions dans `obsidian/decisions.md`. Banc d'essai dans `evals/`.
