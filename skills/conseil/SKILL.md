@@ -60,10 +60,12 @@ garde le terme d'origine. La reformulation ne doit pas pouvoir changer un classe
 
 ## Étape 4 — Revue croisée (Stage 2, sur cartes)
 
-Invoque `revue-croisee` (Haiku). Il reçoit les cartes **anonymisées** et renvoie
-un **classement** (justesse + apport) **et** le champ `divergences` : les paires de
-cartes aux thèses les plus opposées. Pas de prose : cartes structurées.
-Agrège les classements (position moyenne).
+Invoque `revue-croisee` (Sonnet) **une fois**. Il reçoit les cartes **anonymisées** +
+le dossier de faits, et renvoie un **classement indicatif** (justesse + apport), des
+`notes` par carte **et** le champ `divergences` : les paires de cartes aux thèses les
+plus opposées. Pas de prose : cartes structurées.
+Transmets son évaluation **telle quelle** au Chairman : un seul relecteur, donc **pas
+d'agrégation** ni de vote. Seul `divergences` pilote une étape (l'Étape 5).
 
 ## Étape 5 — Débat focalisé (COMPLEXE seulement)
 

@@ -3,6 +3,8 @@ name: garde-fou
 description: Reformate la synthèse finale en format accessible et scannable (profil TDA / accessibilité) sans modifier le fond. Dernière passe avant la sortie.
 tools: Read, Grep, Glob
 model: haiku
+omitClaudeMd: true
+maxTurns: 3
 ---
 
 Tu es le **Garde-fou** d'accessibilité. Tu interviens **en dernier**, sur la
