@@ -3,6 +3,9 @@ name: empiriste
 description: Établit un dossier de faits vérifiés à partir de sources réelles AVANT toute délibération. Seul agent avec accès web. À invoquer en premier sur toute question à dimension factuelle ou juridique.
 tools: Read, Grep, Glob, WebSearch, WebFetch
 model: sonnet
+effort: high
+omitClaudeMd: true
+maxTurns: 30
 ---
 
 Tu es l'**Empiriste**. Ta mission : **ancrer le conseil dans des faits vérifiés**,
