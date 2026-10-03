@@ -31,7 +31,7 @@ justification: <1 phrase>
 Le champ `grounding_requis` **pilote l'Étape 1** — ne l'ignore jamais.
 
 - **TRIVIALE**
-  - `grounding_requis: non` → réponds directement (1 passe Sonnet), saute au Garde-fou. STOP.
+  - `grounding_requis: non` → réponds directement (1 passe), saute au Garde-fou (Étape 7). STOP.
   - `grounding_requis: oui` → passe d'abord par l'Empiriste (Étape 1) pour une mini-vérification,
     puis réponds. Sans source trouvée → réponse avec **drapeau « non sourcé »**.
     Jamais de fait tiré de la mémoire sans signalement.
@@ -56,18 +56,19 @@ sur une question factuelle.
 
 Invoque les personas retenus **en parallèle** (toutes les invocations dans un seul message),
 chacun recevant : la question + le dossier de faits.
-Chaque persona rend une **CARTE** — schéma canonique unique : `CLAUDE.md` § *Schéma de CARTE*.
-Ne redéfinis pas le schéma ici ; si tu dois le modifier, modifie-le seulement à cet endroit.
+Chaque persona rend une **CARTE** — schéma canonique unique : `references/carte.md`.
+Ne redéfinis pas le schéma ici.
 
-## Étape 3 — Normalisation + anonymisation
+## Étape 3 — Anonymisation (mécanique)
 
-**Toi (Sonnet).** Réécris chaque carte dans un **style neutre uniforme**
-(supprime les tics stylistiques qui trahissent le persona). Étiquette A, B, C…
-Conserve une table `étiquette → persona` côté Orchestrateur, **non transmise**.
+Les cartes sont déjà structurées : **pas de réécriture de style**.
+1. Ne garde que les 4 champs du schéma ; jette tout texte hors carte.
+2. Supprime les **auto-références explicites** au rôle (« en tant qu'Adversaire… »). Rien d'autre.
+3. **Mélange l'ordre**, puis étiquette A, B, C…
+4. Conserve une table `étiquette → persona` côté Orchestrateur, **non transmise**.
 
-⚠️ **Style uniquement.** Ne modifie **jamais** la thèse, les preuves, la confiance ni les
-drapeaux d'une carte — tu normalises la forme, tu n'arbitres pas le fond. En cas de doute,
-garde le terme d'origine. La reformulation ne doit pas pouvoir changer un classement.
+⚠️ Thèse, preuves, confiance et drapeaux passent **mot pour mot**. Toute autre retouche
+est interdite : tu n'arbitres pas le fond.
 
 ## Étape 4 — Revue croisée (Stage 2, sur cartes)
 
@@ -82,24 +83,34 @@ d'agrégation** ni de vote. Seul `divergences` pilote une étape (l'Étape 5).
 
 Prends les paires `divergences` remontées par la revue-croisée (2-3 cartes).
 Via ta table interne `étiquette → persona`, **ré-invoque les personas source** de ces
-cartes pour un affrontement : **1 tour, 400 tokens max par camp**. Chaque camp défend sa
-thèse et attaque l'autre. Récupère le résultat (dé-anonymisé côté Orchestrateur, jamais
+cartes pour un affrontement : **1 tour, 400 tokens max par camp**. Chaque camp reçoit
+**sa carte, la carte adverse et le dossier de faits** (une ré-invocation repart d'un
+contexte vide), défend sa thèse et attaque l'autre. Récupère le résultat (dé-anonymisé côté Orchestrateur, jamais
 renvoyé aux autres agents).
 
 ## Étape 6 — Synthèse
 
-Invoque `chairman` (Opus) avec : cartes + classements + résultat du débat.
-Il rend **obligatoirement** :
+Invoque `chairman` (Opus) avec : question + dossier de faits + cartes + évaluation de la
+revue croisée + résultat du débat + profil de sortie éventuel. Il rend **directement au
+format scannable** et **obligatoirement** :
 
 1. **Thèse majoritaire** (avec confiance).
 2. **Objection minoritaire la plus forte** (même si 1 contre 4).
 3. **Ce qui ferait basculer** la conclusion.
 4. **Niveau de confiance global** + drapeaux non levés.
+5. **Une seule prochaine action.**
 
-## Étape 7 — Garde-fou (sortie)
+## Étape 7 — Garde-fou (vérification de sortie)
 
-Invoque `garde-fou` (Haiku) : reformate la synthèse en **scannable** (chunks courts,
-gras sur mots-clés, une action unique en fin). Ne touche pas au fond.
+Invoque `garde-fou` (Haiku) avec la synthèse. Il **vérifie sans réécrire** et renvoie
+`verdict: conforme | non_conforme` + `defauts`.
+- `conforme` → la synthèse du Chairman est la sortie finale, **inchangée**.
+- `non_conforme` → ré-invoque `chairman` **une seule fois** avec sa synthèse + la liste
+  `defauts`. Sa seconde version est finale, même imparfaite ; les défauts restants vont
+  au journal.
+
+Branche **TRIVIALE** : ta réponse directe est écrite au format scannable, puis vérifiée
+de la même manière (corrige-la toi-même une fois si `non_conforme`).
 
 ## Étape 8 — Journal
 
