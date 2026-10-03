@@ -50,7 +50,7 @@ ce `CLAUDE.md` n'est pas chargé chez l'utilisateur du plugin).
 
 ## Journalisation
 
-Chaque conseil écrit un journal dans `logs/AAAA-MM-JJ-HHMM.md` : cartes, évaluation
+Chaque conseil écrit un journal dans `logs/AAAA-MM-JJ-<sujet>.md` : cartes, évaluation
 de la revue croisée, divergences, synthèse, verdict du Garde-fou. Sert la traçabilité et
 le calibrage des rôles. **Local uniquement** : `logs/` est ignoré par git (dépôt public).
 

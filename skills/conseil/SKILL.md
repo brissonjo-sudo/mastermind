@@ -18,6 +18,11 @@ description: Réunit un conseil d'auto-critique structurée pour répondre à un
 
 Dans les étapes, **tu** = l'Orchestrateur. Tu pilotes le flux. Tu n'arbitres pas le fond.
 
+⚠️ **Toute invocation de sous-agent se fait en avant-plan** (`run_in_background: false`).
+Les sous-agents partent en arrière-plan par défaut : un orchestrateur qui termine son tour
+avant leur retour rend une sortie vide. Parallélisme = plusieurs invocations **dans un même
+message**, toutes en avant-plan. Ne rends jamais la main tant qu'une étape attend un résultat.
+
 ## Étape 0 — Routage
 
 Invoque le sous-agent `routeur`. Il renvoie **trois champs** :
@@ -114,8 +119,10 @@ de la même manière (corrige-la toi-même une fois si `non_conforme`).
 
 ## Étape 8 — Journal
 
-Écris `logs/AAAA-MM-JJ-HHMM.md`. Gabarit détaillé : `references/log-format.md`
-(à lire seulement à cette étape).
+Écris `logs/AAAA-MM-JJ-<sujet>.md` (`<sujet>` : 2-5 mots kebab-case ; l'heure n'est
+pas accessible). Gabarit détaillé : `references/log-format.md` (à lire seulement à cette
+étape). Gabarit illisible (permission refusée) → journal minimal (question, routage,
+cartes, synthèse, verdict Garde-fou) + mention du refus.
 
 ## Garde-fous
 

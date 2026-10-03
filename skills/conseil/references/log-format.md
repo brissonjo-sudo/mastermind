@@ -1,4 +1,4 @@
-# Format du journal — `logs/AAAA-MM-JJ-HHMM.md`
+# Format du journal — `logs/AAAA-MM-JJ-<sujet>.md`
 
 Référence chargée uniquement à l'Étape 8 (journalisation), pas à chaque invocation
 du skill — allège le coût toujours-actif du playbook.
@@ -6,7 +6,7 @@ du skill — allège le coût toujours-actif du playbook.
 ## Gabarit
 
 ```markdown
-# Journal de conseil — AAAA-MM-JJ HH:MM
+# Journal de conseil — AAAA-MM-JJ
 
 **Question :** « <question posée> »
 
@@ -51,5 +51,5 @@ Verdict : conforme | non_conforme (→ 1 reprise Chairman) — défauts restants
 
 - Une section vide (ex. pas de débat focalisé en STANDARD) : omets-la plutôt que
   d'écrire "N/A" — garde le journal scannable.
-- Le nom de fichier utilise l'heure de fin de délibération, pas de début.
+- `<sujet>` : 2 à 5 mots en kebab-case tirés de la question (l'heure n'est pas accessible aux agents). Si le fichier existe, suffixe `-2`, `-3`…
 - Le journal reste **local** : `logs/` est ignoré par git (questions potentiellement sensibles).
