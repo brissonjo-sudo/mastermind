@@ -6,7 +6,7 @@
   "description": "Conseil d'auto-critique structurée multi-agents : grounding factuel, débat multi-postures anonymisé, synthèse exposant la dissidence.",
   "author": {
     "name": "brissonjo",
-    "email": "brisson.jo@gmail.com"
+    "url": "https://github.com/brissonjo-sudo"
   },
   "repository": "https://github.com/brissonjo-sudo/mastermind",
   "license": "MIT",
